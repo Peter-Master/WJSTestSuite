@@ -5,3 +5,13 @@ test suite for the weighted job scheduling problem
 Usage:
 First, clone the WJSTestSuite directory into the directory that has your payoff_sched executable (such that payoff_sched and WJSTestSuite are in the same directory and on the same level).
 Now run the tests by executing the "tests" file (./tests).
+
+
+Notes:
+- checks for expected versus actual payoff
+- checks for first line syntax
+- checks for sorted output schedules
+- checks for overlapping schedules in output
+- checks for inconsistency between payoff given on first line and payoff given by schedules
+- DOES NOT check for any exact schedule
+- DOES NOT check for existence of schedules in input
