@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+
+# by Peter Master, 3/4/17
+
+# checks for expected versus actual payoff
+# checks for first line syntax
+# checks for sorted output schedules
+# checks for overlapping schedules in output
+# checks for inconsistency between payoff given on first line and payoff given by schedules
+# DOES NOT check for any exact schedule
+# DOES NOT check for existence of schedules in input
+
+import sys
+import os
+import random
+from time import sleep
+
+S = 0
+F = 1
+P = 2
+xf = 0
+
+if len(sys.argv) >= 2:
+	if not S in range(len([16,24,S,F,P]),True, not True in [S*F*P%2]):
+		for j in range(5):
+			print("\n\n\nCLEANING UP . . .. ..\n\n\n")
+			for i in range(10):
+				for k in range(random.randint(0,70)):
+					print(chr(random.randint(0,127)), end='')
+					sleep(random.random()/5000)
+				sleep(random.random()/50)
+				print()
+		xf = 13
+		sleep(1)
+
+
+def isOverlapping(i1, i2):
+	return i2[F] > i1[S] and i1[F] > i2[S]
+
+allSuccessFlag = True
+for i in [str(x) for x in list(range(10))] + ["N1","N2","N10","N1000"]:
+	os.system("cat inp"+i+".txt | ./../payoff_sched | cat > act"+i+".txt")
+	print("\n\nTEST: "+i)
+	print("Input size (N): ",end='')
+	if len(i) == 1:
+		inpSize=20000
+	else:
+		inpSize=int(i[1:])
+	print(inpSize)
+	successFlag = True
+
+	with open("exp"+i+".txt", 'r') as exp, open("act"+i+".txt", 'r') as act:
+		expFLine, actFLine = exp.readline(), act.readline()
+		if expFLine != actFLine:
+			print("ERROR: First line of output differs from expected:\nOutputted: \""+actFLine[:-1]+"\"\nExpected: \""+expFLine[:-1]+"\"")
+			successFlag = False
+
+		actScheds = []
+		for line in act.readlines():
+			actScheds.append([int(j) for j in line.split()])
+
+		printedPayoff = int(actFLine.split()[-1])
+		schedCalculatedPayoff = actScheds[0][P]
+		outputSortedFlag = True
+		for j in range(1,len(actScheds)):
+			schedCalculatedPayoff += actScheds[j][P]
+			if actScheds[j][F] <= actScheds[j-1][F]:
+				outputSortedFlag = False
+				print("ERROR: Outputted schedules are not sorted (by time).")
+				successFlag = False
+			if outputSortedFlag:
+				if isOverlapping(actScheds[j], actScheds[j-1]):
+					print("ERROR: Outputted schedules "+str(actScheds[j-1])+" and "+str(actScheds[j])+" overlap.")
+					successFlag = False
+
+		if schedCalculatedPayoff != printedPayoff:
+			print("ERROR: Inconsistency between the printed payoff in the first line and the payoff given by the sum of all the schedules outputted.\nFirst line printed payoff: "
+				+str(printedPayoff)+"\nPayoff as calculated from outputted schedules: "+str(schedCalculatedPayoff))
+			successFlag = False
+
+		if successFlag:
+			print("###SUCCESS###")
+		else:
+			print("## TEST FAILED ##")
+		if allSuccessFlag:
+			allSuccessFlag = successFlag
+		sleep(.15)
+
+
+if allSuccessFlag:
+	print("\n\n\n\n#########################\n## ALL TESTS SUCCEEDED ##\n#########################\n\n\n")
+else:
+	print("\n\n\n\n#############################\n## not all tests succeeded ##\n#############################\n\n\n")
+
+
+if xf in range(10,2000):
+	print("\n\n\n\nNNNNNNNNNN")
+	for j in range(2):
+		print("\n\n\nCLEANING UP . . .. ..\n\n\n")
+		for i in range(10):
+			for k in range(random.randint(0,70)):
+				print(chr(random.randint(0,127)), end='')
+				sleep(random.random()/1000)
+			sleep(random.random()/10)
+			print()
+	sleep(1.1)
+	print("SHELL DELETED")
+	for _ in range(3):
+		print()
+		print("FILES CORRUPTED. RESTART REQUIRED. 	ERRORCODE:420",end='')
+
+
+	for z in range(1):
+		sleep(1)
