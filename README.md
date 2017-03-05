@@ -5,7 +5,14 @@ test suite for the weighted job scheduling problem
 # Usage:
 First, clone the WJSTestSuite directory into the directory that has your payoff_sched executable (such that payoff_sched and WJSTestSuite are in the same directory and on the same level -- "tests" and "payoff_sched" executables should not be on the same level).
 Now run the tests by executing the "tests" file.
-<pre><code>./tests
+
+Note: you may need to add execute permissions to tests and payoff_sched:
+
+<pre><code>
+chmod +x payoff_sched
+cd WJSTestSuite
+chmod +x tests
+./tests
 </code></pre>
 
 
