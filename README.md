@@ -8,12 +8,10 @@ Now run the tests by executing the "tests" file.
 
 Note: you may need to add execute permissions to tests and payoff_sched:
 
-<pre><code>
-chmod +x payoff_sched
+<pre><code>chmod +x payoff_sched
 cd WJSTestSuite
 chmod +x tests
-./tests
-</code></pre>
+./tests</code></pre>
 
 
 # Notes:
