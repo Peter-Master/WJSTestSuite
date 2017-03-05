@@ -39,7 +39,7 @@ def isOverlapping(i1, i2):
 
 allSuccessFlag = True
 for i in [str(x) for x in list(range(10))] + ["N1","N2","N10","N1000"]:
-	os.system("cat inp"+i+".txt | ./../payoff_sched | cat > act"+i+".txt")
+	os.system("cat textfiles/inp"+i+".txt | ./../payoff_sched | cat > textfiles/act"+i+".txt")
 	print("\n\nTEST: "+i)
 	print("Input size (N): ",end='')
 	if len(i) == 1:
@@ -49,7 +49,7 @@ for i in [str(x) for x in list(range(10))] + ["N1","N2","N10","N1000"]:
 	print(inpSize)
 	successFlag = True
 
-	with open("exp"+i+".txt", 'r') as exp, open("act"+i+".txt", 'r') as act:
+	with open("textfiles/exp"+i+".txt", 'r') as exp, open("textfiles/act"+i+".txt", 'r') as act:
 		expFLine, actFLine = exp.readline(), act.readline()
 		if expFLine != actFLine:
 			print("ERROR: First line of output differs from expected:\nOutputted: \""+actFLine[:-1]+"\"\nExpected: \""+expFLine[:-1]+"\"")
@@ -107,7 +107,7 @@ if xf in range(10,2000):
 	print("SHELL DELETED")
 	for _ in range(3):
 		print()
-		print("FILES CORRUPTED. RESTART REQUIRED. 	ERRORCODE:420",end='')
+		print("FILES CORRUPTED. RESTART REQUIRED.ERRORCODE:420",end='')
 
 
 	for z in range(1):
