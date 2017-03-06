@@ -51,7 +51,7 @@ for i in [str(x) for x in list(range(10))] + ["N1","N2","N10","N1000"]:
 
 	with open("textfiles/exp"+i+".txt", 'r') as exp, open("textfiles/act"+i+".txt", 'r') as act:
 		expFLine, actFLine = exp.readline(), act.readline()
-		if expFLine != actFLine:
+		if expFLine != actFLine and expFLine[:3]+"imum"+expFLine[3:] != actFLine:
 			print("ERROR: First line of output differs from expected:\nOutputted: \""+actFLine[:-1]+"\"\nExpected: \""+expFLine[:-1]+"\"")
 			successFlag = False
 
