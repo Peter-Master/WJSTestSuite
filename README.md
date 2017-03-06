@@ -11,6 +11,7 @@ Note: you may need to add execute permissions to tests and payoff_sched:
 <pre><code>chmod +x payoff_sched
 cd WJSTestSuite
 chmod +x tests
+dos2unix tests
 ./tests</code></pre>
 
 
