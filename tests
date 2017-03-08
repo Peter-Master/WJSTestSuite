@@ -40,7 +40,7 @@ def isOverlapping(i1, i2):
 os.system("cd ..")
 allSuccessFlag = True
 for i in [str(x) for x in list(range(10))] + ["N1","N2","N10","N1000"]:
-	os.system("cat WJSTestSuite/textfiles/inp"+i+".txt | ./../payoff_sched | cat > WJSTestSuite/textfiles/act"+i+".txt")
+	os.system("cat WJSTestSuite/textfiles/inp"+i+".txt | ./payoff_sched | cat > WJSTestSuite/textfiles/act"+i+".txt")
 	print("\n\nTEST: "+i)
 	print("Input size (N): ",end='')
 	if len(i) == 1:
